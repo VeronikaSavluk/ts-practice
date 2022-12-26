@@ -18,25 +18,29 @@ class Person {
 };
 
 abstract class House {
-	private door = false;
+	protected door = false;
 	private tenants: Person[] = [];
 
 	constructor(protected key: Key){}
 	
-	comeln(){
+	comeln (person: Person):void {
 	if(!this.door){
-		return this.tenants;
+		throw new Error('Door is closed');
 	}
 	
+	this.tenants.push(person);
+	console.log('Person is inside')
+	}
 
-	};
-}
-
-
-class House {
-private door:string;
-
-constructor(){
-
-}
+	abstract openDoor (key: Key): boolean;
 };
+
+class MyHouse extends House {
+ openDoor(key:Key) {
+	if(key.getSignature() !== this.key.getSignature()){
+		throw new Error('Key to another door');
+	};
+
+	return this.door = true;
+ }
+}
