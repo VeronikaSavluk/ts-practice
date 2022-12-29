@@ -24,4 +24,8 @@ function compare (top: Pick<AllType, 'name' | 'color'>, bottom: Pick<AllType, 'p
     position: bottom.position,
     weight: bottom.weight,
   }
-}
+};
+
+function merge<T extends object, U extends object> (objA: T, objB: U) {
+  return Object.assign(objA, objB);
+};
